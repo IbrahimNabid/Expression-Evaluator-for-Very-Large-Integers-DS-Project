@@ -1,0 +1,30 @@
+name: Publish web version
+
+on:
+  push:
+    branches:
+      - 'main'
+    paths:
+      - 'README.md'
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v2
+      - name: Checkout web
+        uses: actions/checkout@v2
+        with:
+          ref: web
+          path: web
+      - name: Commit web
+        run: |
+          cp README.md web/ && cd web
+          if [[ $(git status --porcelain --untracked-files=no | wc -l) -gt 0 ]]; then
+            git config --local user.email "actions@github.com"
+            git config --local user.name "GitHub Actions"
+            git add 'README.md'
+            git commit -m "update"
+            git push
+          fi

@@ -1,0 +1,24 @@
+{
+	// https://github.com/cisc2200/dockerfiles
+	"image": "cisc2200/cpp-dev-container:latest",
+	"settings": {
+		"editor.formatOnType": true,
+		"C_Cpp.intelliSenseEngine": "Default",
+		"C_Cpp.enhancedColorization": "Enabled",
+		"C_Cpp.formatting": "clangFormat",
+		"C_Cpp.clang_format_path": "/usr/bin/clang-format",
+		"C_Cpp.clang_format_style": "LLVM",
+		"C_Cpp.clang_format_fallbackStyle": "LLVM"
+	},
+	"extensions": [
+		"hnw.vscode-auto-open-markdown-preview",
+		"cschlosser.doxdocgen",
+		"ms-vscode.cpptools",
+	],
+	"runArgs": [
+		"--rm",
+		"--cap-add=SYS_PTRACE",
+		"--security-opt",
+		"seccomp=unconfined"
+	]
+}
